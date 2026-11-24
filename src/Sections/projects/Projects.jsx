@@ -43,16 +43,9 @@ const Projects = () => {
   const isTablet =
     window.innerWidth >= 768 && window.innerWidth < 1024;
 
-  // Canvas loading state
   const [loadCanvas, setLoadCanvas] = useState(false);
   const canvasSectionRef = useRef(null);
 
-  // Preload 3D JavaScript modules immediately
-  // useEffect(() => {
-  //   loadProjectsCanvas();
-  // }, []);
-
-  // Render Canvas when Projects section approaches
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

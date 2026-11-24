@@ -96,7 +96,7 @@ const ProjectsShowcase = () => {
 
   const RADIUS = isMobile ? 4.3 : isTablet ? 4.0 : extralargescreen ? 4.4 : 4.3;
   // for responsive
-
+  
   // for rotation
   const currentrotationref = useRef(0);
   const targetrotationref = useRef(0);

@@ -26,43 +26,7 @@ const Card3d = ({
     return [x, 0, z];
   }, [angles, RADIUS]);
 
-  // unifrom
-
-  // const uniforms = useMemo(
-  //   () => ({
-  //     uTexture: { value: texture },
-  //     uScrollSpeed: { value: 0 },
-  //     uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-  //     uHover: { value: 0 },
-  //   }),
-  //   [texture],
-  // );
-
-  // const materialref = useRef(null);
-  // const mouseRef = useRef(new THREE.Vector2(0.5, 0.5));
-  // const hoverRef = useRef(0);
-
-  // useframe for cruve
-
-  // useFrame((state, delta) => {
-  //   if (!materialref.current) return;
-
-  //   const uniforms = materialref.current.uniforms;
-
-  //   uniforms.uScrollSpeed.value = scrollspeedref.current;
-  //   uniforms.uMouse.value.copy(mouseRef.current);
-
-  //   uniforms.uHover.value = THREE.MathUtils.damp(
-  //     uniforms.uHover.value,
-  //     hoverRef.current,
-  //     8,
-  //     delta,
-  //   );
-
-    // if (texture instanceof THREE.VideoTexture) {
-    //   texture.needsUpdate = true;
-    // }
-  // });
+ 
 
   return (
     <>
@@ -92,11 +56,7 @@ const Card3d = ({
       >
         <planeGeometry args={[CARD_W, CARD_H, 1, 1]} />
         <meshBasicMaterial
-          // ref={materialref}
-          // vertexShader={vertexshaders}
-          // fragmentShader={Fragmentshaders}
           map={texture}
-          // uniforms={uniforms}
           side={THREE.DoubleSide}
         />
       </mesh>

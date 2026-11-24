@@ -6,11 +6,27 @@ import { IoCloseOutline } from "react-icons/io5";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 import { locoRef } from "../hooks/SmoothScrolling";
-
+import Hunainresume from "../../public/assets/images/Muhammad Hunain Resume.pdf"
 const Header = () => {
   const [MEnuoepn, setMEnuoepn] = useState(false);
   const menuRef = useRef(null);
   const tl = useRef(null);
+
+  const handleResume = () => {
+  const resumeUrl = Hunainresume;
+
+  // Open resume in new tab
+  window.open(resumeUrl, "_blank");
+
+  // Download resume
+  const link = document.createElement("a");
+  link.href = resumeUrl;
+  link.download = "My-Resume.pdf";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
   useEffect(() => {
     // Set initial state so it's hidden but exists in the DOM
@@ -132,11 +148,11 @@ const Header = () => {
   };
 
   return (
-    <div className=" lg:px-0 px-2 w-full  lg:py-3 py-3  flex-col items-center gap-1 justify-center top-0 left-1/2 -translate-x-1/2 flex fixed z-999">
+    <header className=" lg:px-0 px-2 w-full  lg:py-3 py-3  flex-col items-center gap-1 justify-center top-0 left-1/2 -translate-x-1/2 flex fixed z-999 overflow-hidden">
       {/* We keep the menu in the DOM always, but handle visibility with GSAP */}
 
       {/* main menu */}
-      <div className="actay p-1  cursor-pointer lg:w-sm md:w-md 2xl:w-md w-full   rounded-1xl lg:px-3 px-2  overflow-hidden   bg-[#201D1D] grid grid-cols-2">
+      <div className="actay p-1  cursor-pointer lg:w-sm md:w-md 2xl:w-md w-full   rounded-1xl lg:px-3 px-2  overflow-hidden bg-[#201D1D] flex items-center justify-between">
         <div className=" h-full flex items-center  justify-start gap-1 text-white">
           <div
             onClick={() => {
@@ -150,27 +166,44 @@ const Header = () => {
               <VscMenu className="lg:text-[1.5vw] text-1xl md:text-2xl -mt-1  " />
             )}
           </div>
-          <h2 className="lg:text-[1.1vw] text-1xl md:text-2xl">Menu</h2>
-        </div>
-        <a
+          <h2 className="lg:text-[1.1vw] text-1xl md:text-lg">Menu</h2>
+        </div>  
+        <div className="left h-full w-full gap-3 flex items-center justify-end">
+       
+            <a
           href="#contact"
           className="h-full  cursor-pointer flex items-center justify-end "
         >
-          <button className="px-4 py-2 font-bold bg-[#BBFD6A]  cursor-pointer rounded-[0.3vw] lg:text-[2.1vh] text-sm md:text-lg rounded-1xl">
+          <button className="px-4 py-2 font-bold bg-[#BBFD6A]  cursor-pointer rounded-[0.3vw] lg:text-[2.1vh] text-sm md:text-sm rounded-1xl">
             Contact Us
           </button>
         </a>
+           <a
+          href="#contact"
+          className="h-full  cursor-pointer flex items-center justify-end "
+        >
+          <button   onClick={handleResume}
+ className="px-4 py-2 font-bold bg-[#BBFD6A]  cursor-pointer rounded-[0.3vw] lg:text-[2.1vh] text-sm md:text-sm rounded-1xl">
+            Resume
+          </button>
+        </a>
+       
+        </div>
+      
+        
       </div>
+
+    
 
       {/* main menu */}
 
       {/* offer anything say something client */}
 
-      <div className="relative w-fit overflow-hidden  lg:opacity-100 opacity-0 bg-[#A0FD62]">
+      <div className="relative w-fit overflow-hidden   bg-[#A0FD62]">
         {/* Width determine karne ke liye sirf 3 items */}
         <div className="flex invisible">
           {textobj.slice(0, 3).map((elem, index) => (
-            <h2 key={index} className="actay text-sm">
+            <h2 key={index} className="actay lg:text-sm text-sm">
               {elem.text}
             </h2>
           ))}
@@ -187,7 +220,7 @@ const Header = () => {
           }}
         >
           {[...textobj, ...textobj].map((elem, index) => (
-            <h2 key={index} className="text-[1.7vh] shrink-0">
+            <h2 key={index} className="text-[1.7vh]  shrink-0">
               {elem.text}
             </h2>
           ))}
@@ -200,7 +233,7 @@ const Header = () => {
 
       <div
         ref={menuRef}
-        className=" lg:w-lg  lg:py-5 md:py-10 py-4  overflow-hidden grid grid-cols-2  rounded-1xl bg-[#201D1D]"
+        className=" lg:w-sm w-full  lg:py-5 md:py-10 py-4  overflow-hidden grid grid-cols-1  rounded-1xl bg-[#201D1D]"
       >
         <div className="flex justify-center  h-full w-full items-center gap-3  flex-col">
           {obj.map((elem, index) => {
@@ -211,7 +244,7 @@ const Header = () => {
               >
                 <button
                   onClick={() => scrollToSection(elem.href)}
-                  className="bg-[#BBFD6A] flex items-center justify-center  w-full lg:py-3 py-2 rounded-[1vw]  actay"
+                  className="border-1 border-white text-white flex items-center justify-center  w-full lg:py-3 py-2 rounded-[1vw]  actay"
                 >
                   <Textanimation
                     text={elem.text}
@@ -224,8 +257,9 @@ const Header = () => {
           })}
         </div>
 
-        <div className="resume-section h-full pt-10 text-white  ">
-          <div className=" w-full lg:px-10 px-5 md:px-20">
+        {/* <div className="resume-section h-full pt-10 text-white  ">
+          <div 
+          className=" w-full lg:px-10 px-5 md:px-20">
             <img
               src="/assets/images/hunain.webp"
               loading="lazy"
@@ -238,14 +272,13 @@ const Header = () => {
               text="Resume"
               classname="actay lg:text-[1.3vw] xl:text-1xl md:text-3xl 2xl:text-md text-center"
             />
-            {/* <h2 className=' '>Resume</h2> */}
             <FaLocationArrow className="text-white  2xl:text-sm xl:text-[1.3vw] lg:text-[1.5vw] text-1xl md:text-2xl  " />
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* menu bar open */}
-    </div>
+    </header>
   );
 };
 
